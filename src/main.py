@@ -1,21 +1,26 @@
-from typing import Union
 
-from fastapi import FastAPI
+import fastapi
 
-app = FastAPI()
+import model
+import database
+
+app = fastapi.FastAPI()
 
 @app.get("/")
 def root():
     return ""
 
 @app.get("/projects")
-def read_projects(project_id: int, q: Union[str, None] = None):
+def read_projects(project_id: int, q: str|None = None) -> list[model.Project]:
     _ = project_id
     _ = q
-    return ["a"]
+    return database.get_all_projects()
 
 @app.get("/projects/{project_id}")
-def read_project(project_id: int, q: Union[str, None] = None):
-    _ = project_id
+def read_project(project_id: int, q: str|None = None) -> model.Project:
     _ = q
-    return [{"a": 2}]
+    project = database.get_project(project_id)
+    if project is None:
+        raise fastapi.HTTPException(404, 'Project with a given ID not found')
+    return project
+        

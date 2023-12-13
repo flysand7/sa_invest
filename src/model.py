@@ -86,7 +86,7 @@ class Project:
     industry_id:        int
     name:               str
     app_own_amount:     float
-    app_support_amount: float
+    app_sup_amount:     float
     work_place_count:   int
     tax_amount:         int
     desk:               list[int]

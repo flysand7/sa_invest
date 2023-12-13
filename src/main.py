@@ -16,6 +16,10 @@ def read_projects(project_id: int, q: str|None = None) -> list[model.Project]:
     _ = q
     return database.get_all_projects()
 
+@app.post("/projects")
+def create_projects(project: model.Project) -> int:
+    return database.add_project(project)
+
 @app.get("/projects/{project_id}")
 def read_project(project_id: int, q: str|None = None) -> model.Project:
     _ = q

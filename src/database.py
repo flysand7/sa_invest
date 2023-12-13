@@ -44,5 +44,41 @@ def get_project(id: int) -> model.Project|None:
             if data is None:
                 return None
             return project_from_tuple(data)
-            
+
+def add_project(project: model.Project) -> int:
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                '''
+                INSERT INTO project (
+                    user_id,
+                    owner_id,
+                    address_id,
+                    industry_id,
+                    name,
+                    app_own_amount,
+                    app_sup_amount,
+                    work_place_count,
+                    tax_amount,
+                    desk
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                ''',
+                (
+                    project.user_id,
+                    project.owner_id,
+                    project.address_id,
+                    project.industry_id,
+                    project.app_sup_amount,
+                    project.name,
+                    project.app_own_amount,
+                    project.app_sup_amount,
+                    project.work_place_count,
+                    project.tax_amount,
+                )
+            )
+            data = cursor.fetchone()
+            print(data)
+            assert(not(data is None))
+            a:int = data[0]
+            return a
             

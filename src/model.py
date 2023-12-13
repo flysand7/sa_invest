@@ -67,7 +67,7 @@ class Support:
     desc:               str
 
 Decision_Type = enum.StrEnum('Decision_Type', [
-    '',
+    'aaa',
 ])
 
 class Decision:

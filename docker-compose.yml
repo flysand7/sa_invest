@@ -9,12 +9,18 @@ services:
     ports:
       - 8000:80
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: postgres:15.0-alpine
     volumes:
       - invest_crm_postgres_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       - POSTGRES_USER=invest_crm
       - POSTGRES_PASSWORD=fdc804cd

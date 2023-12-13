@@ -48,10 +48,11 @@ create table owner_contact (
     owner_id integer         not null references owner(id)
 );
 
-create type Role_Code AS enum ('default', 'admin');
+drop type if exists Role_Code;
+create type Role_Code AS enum ('Default', 'Admin');
 create table "user" (
-    id        serial         primary key,
-    role_code Role_Code      not null
+    id     serial         primary key,
+    "role" Role_Code      not null
 );
 
 create table industry (
@@ -73,6 +74,7 @@ create table project (
     desk             integer[1000]  -- TODO: Понять че это
 );
 
+drop type if exists Decision_Type;
 create type Decision_Type as enum ('');
 create table decision (
     id              serial          primary key,
@@ -83,8 +85,10 @@ create table decision (
     decision        varchar(1000)   not null
 );
 
-create type Support_Type_Code as enum ('');
-create type Unit_Type_Code    as enum ('');
+drop type if exists Support_Type_Code;
+drop type if exists Unit_Type_Code;
+create type Support_Type_Code as enum ('Financial');
+create type Unit_Type_Code    as enum ('RUB');
 create table support (
     id                 serial       primary key,
     project_id         integer      not null references project(id),

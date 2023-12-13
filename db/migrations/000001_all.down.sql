@@ -10,16 +10,16 @@ drop type  Decision_Type;
 drop table project;
 drop table industry;
 
-drop table user;
+drop table "user";
 drop type  Role_Code;
 
-drop table owner_contact;
-drop table owner;
-drop table business_org;
-drop table business_man;
+drop table "owner_contact";
+drop table "owner";
+drop table "business_org";
+drop table "business_man";
 
-drop table address;
-drop table city;
-drop table district;
+drop table "address";
+drop table "city";
+drop table "district";
 
 commit;

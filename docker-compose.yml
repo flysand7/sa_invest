@@ -19,7 +19,7 @@ services:
       - POSTGRES_USER=invest_crm
       - POSTGRES_PASSWORD=fdc804cd
       - POSTGRES_DB=invest_crm
-    ports: 
+    ports:
       - 5433:5432
 
 volumes:
